@@ -4,10 +4,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.led.CANdle;
-import com.ctre.phoenix.led.CANdle.LEDStripType;
-import com.ctre.phoenix.led.CANdleConfiguration;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,29 +17,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-
-    // Initialize the CANdle
-    CANdle candle = new CANdle(3); // Set the correct CAN ID for the CANdle
-
-    // Configure CANdle settings if necessary
-    CANdleConfiguration config = new CANdleConfiguration();
-    config.stripType = LEDStripType.GRB;
-    config.brightnessScalar = 0.5;
-    candle.configAllSettings(config);
-
-    candle.setLEDs(255, 255, 255);
-
-    // RainbowAnimation rainbowAnim = new RainbowAnimation(1, 0.5, 60);
-    // candle.animate(rainbowAnim);
-
-    /*
-    // Add a toggle button on Shuffleboard
-    ledToggleEntry =
-        Shuffleboard.getTab("LED Control") // Create a new tab called "LED Control"
-            .add("LED Toggle", ledOn) // Add a toggle entry
-            .withWidget("Toggle Button") // Use a toggle button widget
-            .getEntry();
-    */
 
     CameraServer.startAutomaticCapture();
 
@@ -86,33 +59,13 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {
-    /*
-    // Check if the toggle button has been changed in Shuffleboard
-    boolean toggle = ledToggleEntry.getBoolean(true);
+  public void teleopPeriodic() {}
 
-    // If the button state has changed, update LED state
-    if (toggle != ledOn) {
-      ledOn = toggle; // Update the LED state
-
-      if (ledOn) {
-        // Turn the LEDs on to the specified color
-        candle.setLEDs(color[0], color[1], color[2]);
-      } else {
-        // Turn the LEDs off (black color)
-        setLEDColor(0, 0, 0);
-      }
-
-      // Update the toggle state in Shuffleboard
-      ledToggleEntry.setBoolean(ledOn);
-    }
-    */
-  }
-
+  /*
   float Kp = -0.1f;
   float min_command = 0.05f;
 
-  /*
+  
   std::shared_ptr<NetworkTable> table = NetworkTable:: GetTable("limelight");
    float tx = table->GetNumber("tx");
 
@@ -153,11 +106,4 @@ public class Robot extends TimedRobot {
 
   @Override
   public void simulationPeriodic() {}
-
-  /*
-  // Helper method to set the LED color
-  public void setLEDColor(int g, int r, int b) {
-    candle.setLEDs(g, r, b); // Sets LEDs to the specified RGB color
-  }
-  */
 }
