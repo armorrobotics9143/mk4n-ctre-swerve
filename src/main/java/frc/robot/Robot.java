@@ -8,19 +8,26 @@ import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.CANdle.LEDStripType;
 import com.ctre.phoenix.led.CANdleConfiguration;
 
-import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.cameraserver.CameraServer;
+import frc.robot.devices.LimelightHelpers;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
 
+  private final boolean UseLimelight = false;
+
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+
+    m_robotContainer.drivetrain.getDaqThread().setThreadPriority(99);
 
     // Initialize the CANdle
     CANdle candle = new CANdle(3); // Set the correct CAN ID for the CANdle
@@ -51,7 +58,25 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run(); 
+    CommandScheduler.getInstance().run();
+
+    /**
+     * This example of adding Limelight is very simple and may not be sufficient for on-field use.
+     * Users typically need to provide a standard deviation that scales with the distance to target
+     * and changes with number of tags available.
+     *
+     * This example is sufficient to show that vision integration is possible, though exact implementation
+     * of how to use vision should be tuned per-robot and to the team's specification.
+     */
+    if (UseLimelight) {
+      var lastResult = LimelightHelpers.getLatestResults("limelight");
+
+      Pose2d llPose = lastResult.getBotPose2d_wpiBlue();
+
+      if (lastResult.valid) {
+        m_robotContainer.drivetrain.addVisionMeasurement(llPose, Timer.getFPGATimestamp());
+      }
+    }
   }
 
   @Override
@@ -109,8 +134,8 @@ public class Robot extends TimedRobot {
     */
   }
 
-  float Kp = -0.1f;
-  float min_command = 0.05f;
+  // float Kp = -0.1f;
+  // float min_command = 0.05f;
 
   /*
   std::shared_ptr<NetworkTable> table = NetworkTable:: GetTable("limelight");
