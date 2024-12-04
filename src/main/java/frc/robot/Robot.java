@@ -4,10 +4,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.led.CANdle;
-import com.ctre.phoenix.led.CANdle.LEDStripType;
-import com.ctre.phoenix.led.CANdleConfiguration;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,6 +18,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_robotContainer = new RobotContainer();
 
+    m_robotContainer.drivetrain.getDaqThread().setThreadPriority(99);
+
+    /*
     // Initialize the CANdle
     CANdle candle = new CANdle(3); // Set the correct CAN ID for the CANdle
 
@@ -36,7 +35,6 @@ public class Robot extends TimedRobot {
     // RainbowAnimation rainbowAnim = new RainbowAnimation(1, 0.5, 60);
     // candle.animate(rainbowAnim);
 
-    /*
     // Add a toggle button on Shuffleboard
     ledToggleEntry =
         Shuffleboard.getTab("LED Control") // Create a new tab called "LED Control"
