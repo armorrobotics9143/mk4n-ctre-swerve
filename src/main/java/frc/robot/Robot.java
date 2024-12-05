@@ -6,13 +6,17 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.devices.BeamBreak;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+   private BeamBreak m_beamBreak;
 
   @Override
   public void robotInit() {
@@ -20,11 +24,14 @@ public class Robot extends TimedRobot {
 
     CameraServer.startAutomaticCapture();
 
+    m_beamBreak = new BeamBreak(3); // Assume sensor is connected to DIO port 3
   }
 
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run(); 
+    CommandScheduler.getInstance().run();
+
+    SmartDashboard.putBoolean("Beam Broken", m_beamBreak.isBeamBroken());
   }
 
   @Override
