@@ -8,11 +8,14 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.devices.UltrasonicRangefinder;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  private final UltrasonicRangefinder ultrasonicSensor = new UltrasonicRangefinder(0, 1); // DIO ports 0 and 1
 
   @Override
   public void robotInit() {
@@ -24,7 +27,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run(); 
+    CommandScheduler.getInstance().run();
+
+    ultrasonicSensor.periodic(); // Continuously updates the SmartDashboard.
   }
 
   @Override
