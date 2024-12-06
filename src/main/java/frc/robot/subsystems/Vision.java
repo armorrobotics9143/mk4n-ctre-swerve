@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class LimelightSubsystem extends SubsystemBase {
+public class Vision extends SubsystemBase {
   private final NetworkTable m_limelight;
 
   private final DoubleSubscriber tv_sub, tx_sub, ty_sub, ta_sub, tid_sub, pipeline_sub;
@@ -33,7 +33,7 @@ public class LimelightSubsystem extends SubsystemBase {
       posePitch_pub,
       poseRoll_pub;
 
-  public LimelightSubsystem() {
+  public Vision() {
     m_limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
     // Subscribers for reading data
