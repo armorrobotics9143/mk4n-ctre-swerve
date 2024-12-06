@@ -32,8 +32,7 @@ Welcome to the `mk4n-ctre-swerve` repository! This project contains the codebase
   - `Robot.java` – Entry point for the robot.
   - `RobotContainer.java` – Initializes subsystems and binds commands for robot control.
   - `Telemetry.java` – Collects and displays real-time robot data for monitoring.
-  - `TunerConstants.java` – Defines important configuration constants for the swerve drive subsystem.
-  - `Constants.java` – Defines important configuration constants for other subsystems and devices.
+  - `Constants.java` – Defines important configuration constants for subsystems and devices.
   - `CommandSwerveDrivetrain.java` – Handles swerve module control and field-oriented driving.
   - `CANdle.java` – Manages the LED system using CTRE’s CANdle.
   - `Limelight.java` – Handles vision processing from the Limelight camera.
