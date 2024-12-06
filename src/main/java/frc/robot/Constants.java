@@ -15,7 +15,7 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants.SteerFeedbackTy
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstantsFactory;
 
 import edu.wpi.first.math.util.Units;
-import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.Swerve;
 
 /*
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -219,7 +219,7 @@ public final class Constants {
             BACK_RIGHT_STEER_MOTOR_ID, BACK_RIGHT_DRIVE_MOTOR_ID, BACK_RIGHT_ENCODER_ID, BACK_RIGHT_ENCODER_OFFSET, Units.inchesToMeters(BACK_RIGHT_X_POS_INCHES), Units.inchesToMeters(BACK_RIGHT_Y_POS_INCHES), INVERT_RIGHT_SIDE)
             .withSteerMotorInverted(BACK_RIGHT_STEER_INVERT);
 
-    public static final CommandSwerveDrivetrain Drivetrain = new CommandSwerveDrivetrain(DrivetrainConstants, FrontLeft,
+    public static final Swerve Drivetrain = new Swerve(DrivetrainConstants, FrontLeft,
             FrontRight, BackLeft, BackRight);
   }
 }
