@@ -85,12 +85,21 @@ import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
 import com.ctre.phoenix.led.TwinkleOffAnimation;
 import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
 
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.Constants;
 
 public class CANdle {
   private final com.ctre.phoenix.led.CANdle candle = new com.ctre.phoenix.led.CANdle(Constants.DeviceConstants.CANDLE_ID);
   private final int LedCount = 60;
   private Animation toAnimate = null;
+
+  private AnimationTypes currentAnimation;
+
+  private GenericEntry ledToggleEntry;
+  private GenericEntry animationChooserEntry;
+
+  private boolean ledOn = false;
 
   public enum AnimationTypes {
     ColorFlow,
@@ -104,8 +113,6 @@ public class CANdle {
     TwinkleOff,
     SetAll
   }
-
-  private AnimationTypes currentAnimation;
 
   public CANdle() {
     configureCANdle();
@@ -185,5 +192,40 @@ public class CANdle {
   
   public void configStatusLedBehavior(boolean offWhenActive) {
     candle.configStatusLedState(offWhenActive, 0);
+  }
+
+  public void setLEDColor(int r, int g, int b) {
+    candle.setLEDs(r, g, b);
+  }
+
+  public void toggleLED() {
+    if (ledOn) {
+        setLEDColor(0, 0, 0); // Turn off
+    } else {
+        setLEDColor(115, 21, 191); // Purple (r: 115, g: 21, b: 191)
+    }
+    ledOn = !ledOn;
+  }
+
+  public void initializeShuffleboard() {
+    ledToggleEntry = Shuffleboard.getTab("LED Control")
+      .add("LED Toggle", false)
+      .withWidget("Toggle Button")
+      .getEntry();
+
+    animationChooserEntry = Shuffleboard.getTab("LED Control")
+      .add("Animation Selector", "ColorFlow")
+      .withWidget("ComboBoxChooser")
+      .getEntry();
+  }
+
+  public void updateLEDStateFromShuffleboard() {
+    boolean toggle = ledToggleEntry.getBoolean(false);
+    String selectedAnimation = animationChooserEntry.getString("ColorFlow");
+    if (toggle) {
+      changeAnimation(AnimationTypes.valueOf(selectedAnimation));
+    } else {
+      setLEDColor(0, 0, 0); // Turn off
+    }
   }
 }
