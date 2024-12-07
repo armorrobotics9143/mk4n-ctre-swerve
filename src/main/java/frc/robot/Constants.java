@@ -99,14 +99,14 @@ public final class Constants {
     // The steer motor uses any SwerveModule.SteerRequestType control request with the
     // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
     public static final Slot0Configs steerGains = new Slot0Configs()
-        .withKP(100).withKI(0).withKD(0.2)
-        .withKS(0).withKV(1.5).withKA(0);
+      .withKP(100).withKI(0).withKD(0.2)
+      .withKS(0).withKV(1.5).withKA(0);
     
     // When using closed-loop control, the drive motor uses the control
     // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
     public static final Slot0Configs driveGains = new Slot0Configs()
-        .withKP(3).withKI(0).withKD(0)
-        .withKS(0).withKV(0).withKA(0);
+      .withKP(3).withKI(0).withKD(0)
+      .withKS(0).withKV(0).withKA(0);
 
     // The closed-loop output type to use for the steer motors;
     // This affects the PID/FF gains for the steer motors
@@ -123,49 +123,49 @@ public final class Constants {
     // Initial configs for the drive and steer motors and the CANcoder; these cannot be null.
     // Some configs will be overwritten; check the `with*InitialConfigs()` API documentation.
     public static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration()
-        .withCurrentLimits(
-            new CurrentLimitsConfigs()
-                // Swerve drive motor requires some torque output, so we can set a medium
-                // stator current limit to help avoid brownouts without significantly impacting performance.
-                .withStatorCurrentLimit(DRIVE_MOTOR_CURRENT_LIMIT)
-                .withStatorCurrentLimitEnable(true)
-        );
+      .withCurrentLimits(
+        new CurrentLimitsConfigs()
+          // Swerve drive motor requires some torque output, so we can set a medium
+          // stator current limit to help avoid brownouts without significantly impacting performance.
+          .withStatorCurrentLimit(DRIVE_MOTOR_CURRENT_LIMIT)
+          .withStatorCurrentLimitEnable(true)
+      );
     
     public static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
-        .withCurrentLimits(
-            new CurrentLimitsConfigs()
-                // Swerve azimuth motor does not require much torque output, so we can set a relatively low
-                // stator current limit to help avoid brownouts without impacting performance.
-                .withStatorCurrentLimit(STEER_MOTOR_CURRENT_LIMIT)
-                .withStatorCurrentLimitEnable(true)
-        );
+      .withCurrentLimits(
+        new CurrentLimitsConfigs()
+          // Swerve azimuth motor does not require much torque output, so we can set a relatively low
+          // stator current limit to help avoid brownouts without impacting performance.
+          .withStatorCurrentLimit(STEER_MOTOR_CURRENT_LIMIT)
+          .withStatorCurrentLimitEnable(true)
+      );
     
     public static final CANcoderConfiguration cancoderInitialConfigs = new CANcoderConfiguration();
 
     public static final SwerveDrivetrainConstants DrivetrainConstants = new SwerveDrivetrainConstants()
-        .withCANbusName(CANBUS_NAME)
-        .withPigeon2Id(PIGEON_ID)
-        .withPigeon2Configs(pigeonConfigs);
+      .withCANbusName(CANBUS_NAME)
+      .withPigeon2Id(PIGEON_ID)
+      .withPigeon2Configs(pigeonConfigs);
 
     public static final SwerveModuleConstantsFactory ConstantCreator = new SwerveModuleConstantsFactory()
-        .withDriveMotorGearRatio(DRIVE_GEAR_RATIO)
-        .withSteerMotorGearRatio(STEER_GEAR_RATIO)
-        .withWheelRadius(WHEEL_RADIUS_INCHES)
-        .withSlipCurrent(SLIP_CURRENT_A)
-        .withSteerMotorGains(steerGains)
-        .withDriveMotorGains(driveGains)
-        .withSteerMotorClosedLoopOutput(STEER_CLOSED_LOOP_OUTPUT)
-        .withDriveMotorClosedLoopOutput(DRIVE_CLOSED_LOOP_OUTPUT)
-        .withSpeedAt12VoltsMps(SPEED_AT_12_VOLTS_MPS)
-        .withSteerInertia(STEER_INERTIA)
-        .withDriveInertia(DRIVE_INERTIA)
-        .withSteerFrictionVoltage(STEER_FRICTION_VOLTAGE)
-        .withDriveFrictionVoltage(DRIVE_FRICTION_VOLTAGE)
-        .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
-        .withCouplingGearRatio(COUPLE_RATIO)
-        .withDriveMotorInitialConfigs(driveInitialConfigs)
-        .withSteerMotorInitialConfigs(steerInitialConfigs)
-        .withCANcoderInitialConfigs(cancoderInitialConfigs);
+      .withDriveMotorGearRatio(DRIVE_GEAR_RATIO)
+      .withSteerMotorGearRatio(STEER_GEAR_RATIO)
+      .withWheelRadius(WHEEL_RADIUS_INCHES)
+      .withSlipCurrent(SLIP_CURRENT_A)
+      .withSteerMotorGains(steerGains)
+      .withDriveMotorGains(driveGains)
+      .withSteerMotorClosedLoopOutput(STEER_CLOSED_LOOP_OUTPUT)
+      .withDriveMotorClosedLoopOutput(DRIVE_CLOSED_LOOP_OUTPUT)
+      .withSpeedAt12VoltsMps(SPEED_AT_12_VOLTS_MPS)
+      .withSteerInertia(STEER_INERTIA)
+      .withDriveInertia(DRIVE_INERTIA)
+      .withSteerFrictionVoltage(STEER_FRICTION_VOLTAGE)
+      .withDriveFrictionVoltage(DRIVE_FRICTION_VOLTAGE)
+      .withFeedbackSource(SteerFeedbackType.FusedCANcoder)
+      .withCouplingGearRatio(COUPLE_RATIO)
+      .withDriveMotorInitialConfigs(driveInitialConfigs)
+      .withSteerMotorInitialConfigs(steerInitialConfigs)
+      .withCANcoderInitialConfigs(cancoderInitialConfigs);
 
     // Front Left
     public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 41;
@@ -204,22 +204,28 @@ public final class Constants {
     public static final double BACK_RIGHT_Y_POS_INCHES = -12.375;
 
     public static final SwerveModuleConstants FrontLeft = ConstantCreator.createModuleConstants(
-            FRONT_LEFT_STEER_MOTOR_ID, FRONT_LEFT_DRIVE_MOTOR_ID, FRONT_LEFT_ENCODER_ID, FRONT_LEFT_ENCODER_OFFSET, Units.inchesToMeters(FRONT_LEFT_X_POS_INCHES), Units.inchesToMeters(FRONT_LEFT_Y_POS_INCHES), INVERT_LEFT_SIDE)
-            .withSteerMotorInverted(FRONT_LEFT_STEER_INVERT);
+      FRONT_LEFT_STEER_MOTOR_ID, FRONT_LEFT_DRIVE_MOTOR_ID, FRONT_LEFT_ENCODER_ID, FRONT_LEFT_ENCODER_OFFSET, Units.inchesToMeters(FRONT_LEFT_X_POS_INCHES), Units.inchesToMeters(FRONT_LEFT_Y_POS_INCHES), INVERT_LEFT_SIDE)
+      .withSteerMotorInverted(FRONT_LEFT_STEER_INVERT);
     
     public static final SwerveModuleConstants FrontRight = ConstantCreator.createModuleConstants(
-            FRONT_RIGHT_STEER_MOTOR_ID, FRONT_RIGHT_DRIVE_MOTOR_ID, FRONT_RIGHT_ENCODER_ID, FRONT_RIGHT_ENCODER_OFFSET, Units.inchesToMeters(FRONT_RIGHT_X_POS_INCHES), Units.inchesToMeters(FRONT_RIGHT_Y_POS_INCHES), INVERT_RIGHT_SIDE)
-            .withSteerMotorInverted(FRONT_RIGHT_STEER_INVERT);
+      FRONT_RIGHT_STEER_MOTOR_ID, FRONT_RIGHT_DRIVE_MOTOR_ID, FRONT_RIGHT_ENCODER_ID, FRONT_RIGHT_ENCODER_OFFSET, Units.inchesToMeters(FRONT_RIGHT_X_POS_INCHES), Units.inchesToMeters(FRONT_RIGHT_Y_POS_INCHES), INVERT_RIGHT_SIDE)
+      .withSteerMotorInverted(FRONT_RIGHT_STEER_INVERT);
     
     public static final SwerveModuleConstants BackLeft = ConstantCreator.createModuleConstants(
-            BACK_LEFT_STEER_MOTOR_ID, BACK_LEFT_DRIVE_MOTOR_ID, BACK_LEFT_ENCODER_ID, BACK_LEFT_ENCODER_OFFSET, Units.inchesToMeters(BACK_LEFT_X_POS_INCHES), Units.inchesToMeters(BACK_LEFT_Y_POS_INCHES), INVERT_LEFT_SIDE)
-            .withSteerMotorInverted(BACK_LEFT_STEER_INVERT);
+      BACK_LEFT_STEER_MOTOR_ID, BACK_LEFT_DRIVE_MOTOR_ID, BACK_LEFT_ENCODER_ID, BACK_LEFT_ENCODER_OFFSET, Units.inchesToMeters(BACK_LEFT_X_POS_INCHES), Units.inchesToMeters(BACK_LEFT_Y_POS_INCHES), INVERT_LEFT_SIDE)
+      .withSteerMotorInverted(BACK_LEFT_STEER_INVERT);
     
     public static final SwerveModuleConstants BackRight = ConstantCreator.createModuleConstants(
-            BACK_RIGHT_STEER_MOTOR_ID, BACK_RIGHT_DRIVE_MOTOR_ID, BACK_RIGHT_ENCODER_ID, BACK_RIGHT_ENCODER_OFFSET, Units.inchesToMeters(BACK_RIGHT_X_POS_INCHES), Units.inchesToMeters(BACK_RIGHT_Y_POS_INCHES), INVERT_RIGHT_SIDE)
-            .withSteerMotorInverted(BACK_RIGHT_STEER_INVERT);
+      BACK_RIGHT_STEER_MOTOR_ID, BACK_RIGHT_DRIVE_MOTOR_ID, BACK_RIGHT_ENCODER_ID, BACK_RIGHT_ENCODER_OFFSET, Units.inchesToMeters(BACK_RIGHT_X_POS_INCHES), Units.inchesToMeters(BACK_RIGHT_Y_POS_INCHES), INVERT_RIGHT_SIDE)
+      .withSteerMotorInverted(BACK_RIGHT_STEER_INVERT);
 
     public static final Swerve Drivetrain = new Swerve(DrivetrainConstants, FrontLeft,
-            FrontRight, BackLeft, BackRight);
+      FrontRight, BackLeft, BackRight);
+  }
+
+  // Properties of the Turret subsystem.
+  public static class TurretConstants {
+    
+    public static final int TURRET_MOTOR_ID = 3;
   }
 }
